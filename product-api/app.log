@@ -1,0 +1,11 @@
+2025-02-10T13:55:49.172+0530 [INFO]  myapp: We are in Hello struct handler method
+2025-02-10T13:55:49.173+0530 [INFO]  myapp: request body: body="{chandransh: pandey}"
+2025-02-10T14:17:28.053+0530 [INFO]  myapp: We are in Hello struct handler method
+2025-02-10T14:17:28.059+0530 [INFO]  myapp: request body: body=""
+2025-02-10T23:37:44.176+0530 [INFO]  myapp: starting server on port 8090
+2025-02-10T23:38:21.819+0530 [INFO]  myapp: We are in Hello struct handler method
+2025-02-10T23:38:21.819+0530 [INFO]  myapp: request body: body=""
+2025-02-10T23:38:21.956+0530 [INFO]  myapp: We are in Hello struct handler method
+2025-02-10T23:38:21.956+0530 [INFO]  myapp: request body: body=""
+2025-02-10T23:38:46.417+0530 [INFO]  myapp: Got killing or Interrupt signal: EXTRA_VALUE_AT_END=interrupt
+2025-02-10T23:38:46.418+0530 [INFO]  myapp: Error starting server: EXTRA_VALUE_AT_END="http: Server closed"

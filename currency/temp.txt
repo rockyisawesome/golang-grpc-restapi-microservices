@@ -1,0 +1,14 @@
+service HelloWorld{
+    // Hello world greeting
+    rpc GetHello() returns ();
+}
+
+service Currency{
+    // GetRate returns the exchange rate for the two provided currency codes
+    rpc GetRate(RateRequest) returns (RateResponse);
+}
+
+// HelloResponse
+message HelloResponse{
+    string Greet = 1;
+}

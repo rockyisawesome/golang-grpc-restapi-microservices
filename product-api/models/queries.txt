@@ -1,0 +1,1 @@
+db.questions.insertOne({"_id":new ObjectId(),"title":'This is my title',"content":'content',"userId": new ObjectId(),"created_at":new Date()})

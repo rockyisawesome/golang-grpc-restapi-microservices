@@ -28,6 +28,7 @@ func NewMongoDB(cfg *configs.MongoDbConfig, lobbs *hclog.Logger) *MongoDB {
 
 func (mango *MongoDB) Connect(ctx context.Context) error {
 
+
 	client, err := mongo.Connect(options.Client().ApplyURI(mango.Config.MongoURI))
 	if err != nil {
 		(*mango.loggs).Error("Error connecting to Mongo DB", "Error", err)
@@ -42,6 +43,7 @@ func (mango *MongoDB) Connect(ctx context.Context) error {
 	}
 	(*mango.loggs).Info("Database is up and active", "Error", err)
 
+
 	mango.Client = client
 	mango.Database = client.Database(mango.Config.DBName)
 	(*mango.loggs).Info("Connected to Database", "DB", mango.Config.DBName)
@@ -51,12 +53,16 @@ func (mango *MongoDB) Connect(ctx context.Context) error {
 
 // Disconnect implements the Database interface
 func (mango *MongoDB) Disconnect(ctx context.Context) error {
+
 	return mango.Client.Disconnect(ctx)
+
 }
 
 // get all the user
 func (mango *MongoDB) ListUsers(ctx context.Context) ([]*models.Users, error) {
+
 	userCollection := mango.Database.Collection("users")
+
 	cursor, err := userCollection.Find(ctx, bson.M{})
 	if err != nil {
 		(*mango.loggs).Error("Not able to find users", err)
@@ -74,6 +80,7 @@ func (mango *MongoDB) ListUsers(ctx context.Context) ([]*models.Users, error) {
 
 func (mango *MongoDB) ListQuestions(ctx context.Context) ([]*models.Question, error) {
 	questionCollection := mango.Database.Collection("questions")
+
 	// userCollection := mango.database.Collection("users")
 	// // find one user
 	// cu, err := userCollection.Find(ctx, bson.M{})

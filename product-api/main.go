@@ -12,15 +12,19 @@ import (
 
 	configData "product-api/configurations"
 
+
 	"github.com/gorilla/mux"
+
 	"github.com/hashicorp/go-hclog"
 )
 
 func main() {
 
 	//create or open the log file
+
 	// try to delete previous logs store it somewhere its little
 	// confusing
+
 	logFile, err := os.OpenFile("app.log", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
 	if err != nil {
 		fmt.Println("Some error occured in creating or opeing a log file", err)
@@ -63,6 +67,7 @@ func main() {
 	loggs.Info("port received from configuration", appcfg.AppURI)
 
 	// create the handler
+
 	// hello := handlers.NewHello(&loggs, mongodb, ctx)
 	userDB := database.NewUsersDB(&loggs, mongodb)
 	userHandler := handlers.NewUserHandler(&loggs, userDB, &ctx)
@@ -73,14 +78,17 @@ func main() {
 	getRouter := gorrilaMux.Methods(http.MethodGet).Subrouter()
 	getRouter.HandleFunc("/users", userHandler.ServeHTTP)
 
+
 	//cerate a new server
 	opts := hclog.StandardLoggerOptions{
 		InferLevels: true,
 	}
 
+
 	httpServer := http.Server{
 		Addr:         appcfg.AppURI,
 		Handler:      gorrilaMux,
+
 		ErrorLog:     loggs.StandardLogger(&opts),
 		ReadTimeout:  5 * time.Second,   // max time to read request from the client
 		WriteTimeout: 10 * time.Second,  // max time to write response to the client

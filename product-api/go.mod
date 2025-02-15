@@ -10,6 +10,9 @@ require (
 require (
 	github.com/fatih/color v1.13.0 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
+
+	github.com/gorilla/mux v1.8.1 // indirect
+
 	github.com/klauspost/compress v1.16.7 // indirect
 	github.com/mattn/go-colorable v0.1.12 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect

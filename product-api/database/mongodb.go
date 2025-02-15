@@ -12,23 +12,24 @@ import (
 )
 
 type MongoDB struct {
-	client   *mongo.Client
-	database *mongo.Database
-	config   *configs.MongoDbConfig
+	Client   *mongo.Client
+	Database *mongo.Database
+	Config   *configs.MongoDbConfig
 	loggs    *hclog.Logger
 }
 
 // returning an instance og MongoDB
 func NewMongoDB(cfg *configs.MongoDbConfig, lobbs *hclog.Logger) *MongoDB {
 	return &MongoDB{
-		config: cfg,
+		Config: cfg,
 		loggs:  lobbs,
 	}
 }
 
 func (mango *MongoDB) Connect(ctx context.Context) error {
 
-	client, err := mongo.Connect(options.Client().ApplyURI(mango.config.MongoURI))
+
+	client, err := mongo.Connect(options.Client().ApplyURI(mango.Config.MongoURI))
 	if err != nil {
 		(*mango.loggs).Error("Error connecting to Mongo DB", "Error", err)
 		return err
@@ -42,21 +43,26 @@ func (mango *MongoDB) Connect(ctx context.Context) error {
 	}
 	(*mango.loggs).Info("Database is up and active", "Error", err)
 
-	mango.client = client
-	mango.database = client.Database(mango.config.DBName)
-	(*mango.loggs).Info("Connected to Database", "DB", mango.config.DBName)
+
+	mango.Client = client
+	mango.Database = client.Database(mango.Config.DBName)
+	(*mango.loggs).Info("Connected to Database", "DB", mango.Config.DBName)
 
 	return nil
 }
 
 // Disconnect implements the Database interface
 func (mango *MongoDB) Disconnect(ctx context.Context) error {
-	return mango.client.Disconnect(ctx)
+
+	return mango.Client.Disconnect(ctx)
+
 }
 
 // get all the user
 func (mango *MongoDB) ListUsers(ctx context.Context) ([]*models.Users, error) {
-	userCollection := mango.database.Collection("users")
+
+	userCollection := mango.Database.Collection("users")
+
 	cursor, err := userCollection.Find(ctx, bson.M{})
 	if err != nil {
 		(*mango.loggs).Error("Not able to find users", err)
@@ -73,7 +79,8 @@ func (mango *MongoDB) ListUsers(ctx context.Context) ([]*models.Users, error) {
 }
 
 func (mango *MongoDB) ListQuestions(ctx context.Context) ([]*models.Question, error) {
-	questionCollection := mango.database.Collection("questions")
+	questionCollection := mango.Database.Collection("questions")
+
 	// userCollection := mango.database.Collection("users")
 	// // find one user
 	// cu, err := userCollection.Find(ctx, bson.M{})

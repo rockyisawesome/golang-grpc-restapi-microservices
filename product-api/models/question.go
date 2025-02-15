@@ -22,7 +22,6 @@ import (
 // }
 
 type Question struct {
-	ID        primitive.ObjectID `bson:"_id"`
 	Title     string             `bson:"title"`
 	Content   string             `bson:"content"`
 	UserID    primitive.ObjectID `bson:"userId"`

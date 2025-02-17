@@ -1,10 +1,12 @@
 package models
 
+
 import (
 	"time"
 
 	"go.mongodb.org/mongo-driver/v2/bson"
 )
+
 
 // type Users struct {
 // 	ID        primitive.ObjectID `bson: "_id""`
@@ -12,6 +14,7 @@ import (
 // 	Email     string             `bson:"email"`
 // 	CreatedAt time.Time          `bson:"created_at"`
 // }
+
 
 type Users struct {
 	ID        bson.ObjectID `bson:"_id" json:"id"`

@@ -54,7 +54,9 @@ func (mango *MongoDB) Connect(ctx context.Context) error {
 
 // Disconnect implements the Database interface
 func (mango *MongoDB) Disconnect(ctx context.Context) error {
+
 	return mango.Client.Disconnect(ctx)
+
 }
 
 func (mango *MongoDB) GetAllUsers(ctx context.Context) ([]*models.Users, error) {

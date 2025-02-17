@@ -4,13 +4,13 @@ import "github.com/hashicorp/go-hclog"
 
 // get the MongoDB
 type UsersDB struct {
-	loggs         *hclog.Logger
-	MongodbClient *MongoDB
+	loggs    *hclog.Logger
+	DbClient Database
 }
 
-func NewUsersDB(l *hclog.Logger, mongodbClient *MongoDB) *UsersDB {
+func NewUsersDB(l *hclog.Logger, dbclient Database) *UsersDB {
 	return &UsersDB{
-		loggs:         l,
-		MongodbClient: mongodbClient,
+		loggs:    l,
+		DbClient: dbclient,
 	}
 }

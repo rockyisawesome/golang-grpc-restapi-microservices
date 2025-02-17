@@ -59,8 +59,10 @@ func (mango *MongoDB) Disconnect(ctx context.Context) error {
 
 }
 
+
 func (mango *MongoDB) GetAllUsers(ctx context.Context) ([]*models.Users, error) {
 	// getting user collection
+
 	userCollection := mango.Database.Collection("users")
 
 	cursor, err := userCollection.Find(ctx, bson.M{})
@@ -77,6 +79,7 @@ func (mango *MongoDB) GetAllUsers(ctx context.Context) ([]*models.Users, error) 
 	}
 	return users, nil
 }
+
 
 func (mango *MongoDB) GetAllQuestion(ctx context.Context) ([]*models.Question, error) {
 	// getting user collection

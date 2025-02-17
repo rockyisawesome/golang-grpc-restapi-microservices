@@ -6,8 +6,8 @@ import (
 	"io"
 	"net/http"
 	"product-api/database"
-
 	"github.com/hashicorp/go-hclog"
+
 )
 
 type UserHandler struct {
@@ -15,6 +15,7 @@ type UserHandler struct {
 	userdb *database.UsersDB
 	ctx    *context.Context
 }
+
 
 func NewUserHandler(l *hclog.Logger, userdb *database.UsersDB, contuxt *context.Context) *UserHandler {
 
@@ -25,7 +26,9 @@ func NewUserHandler(l *hclog.Logger, userdb *database.UsersDB, contuxt *context.
 	}
 }
 
+
 func (userHandle *UserHandler) GetAllUsers(rw http.ResponseWriter, r *http.Request) {
+
 	(*userHandle.loggs).Info("A call made to Hello GetMethod")
 
 	d, err := io.ReadAll(r.Body)
@@ -36,7 +39,9 @@ func (userHandle *UserHandler) GetAllUsers(rw http.ResponseWriter, r *http.Reque
 	}
 
 	(*userHandle.loggs).Info("request body", "body", string(d))
+
 	data, err := userHandle.userdb.DbClient.GetAllUsers(*userHandle.ctx)
+
 	if err != nil {
 		(*userHandle.loggs).Error("Some issue occured in data fetching")
 		http.Error(rw, "Dekho error aa gayi bhai", http.StatusBadRequest)
@@ -116,3 +121,4 @@ func (userHandle *UserHandler) GetAllQuestionsAndReplies(rw http.ResponseWriter,
 
 	json.NewEncoder(rw).Encode(data)
 }
+

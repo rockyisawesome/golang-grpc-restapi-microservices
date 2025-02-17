@@ -76,9 +76,11 @@ func main() {
 	// serveMux.Handle("/", hello)
 	gorrilaMux := mux.NewRouter()
 	getRouter := gorrilaMux.Methods(http.MethodGet).Subrouter()
+
 	getRouter.HandleFunc("/users", userHandler.GetAllUsers)
 	getRouter.HandleFunc("/questions", userHandler.GetAllQuestionsAndReplies)
 	getRouter.HandleFunc("/user", userHandler.GetUserProfileWithQuestion)
+
 
 
 	//cerate a new server

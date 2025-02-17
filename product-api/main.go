@@ -41,11 +41,11 @@ func main() {
 		os.Exit(1)
 	}
 
+	ctx := context.Background()
 	// getting mongodb struct
 	mongodb := database.NewMongoDB(cfg, &loggs)
 
 	// connection with mongodb
-	ctx := context.Background()
 	err = mongodb.Connect(ctx)
 	if err != nil {
 		loggs.Error("Not able to connect to MongoDB database", err)
@@ -71,7 +71,9 @@ func main() {
 	// serveMux.Handle("/", hello)
 	gorrilaMux := mux.NewRouter()
 	getRouter := gorrilaMux.Methods(http.MethodGet).Subrouter()
-	getRouter.HandleFunc("/users", userHandler.ServeHTTP)
+	getRouter.HandleFunc("/users", userHandler.GetAllUsers)
+	getRouter.HandleFunc("/questions", userHandler.GetAllQuestionsAndReplies)
+	getRouter.HandleFunc("/user", userHandler.GetUserProfileWithQuestion)
 
 	//cerate a new server
 	opts := hclog.StandardLoggerOptions{
